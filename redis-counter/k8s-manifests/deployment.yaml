@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-counter
+  namespace: opsbee-stage
+  labels:
+    app: redis-counter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-counter
+  template:
+    metadata:
+      labels:
+        app: redis-counter
+    spec:
+      containers:
+      - name: redis-counter
+        image: benhursilva/redis-counter
+        imagePullPolicy: Always  # Ensures the latest image is pulled
+        resources:
+          requests:
+            cpu: "10m"
+            memory: "128Mi"
+          limits:
+            memory: "128Mi"
+      restartPolicy: Always
