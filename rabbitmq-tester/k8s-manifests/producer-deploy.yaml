@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-producer
+  namespace: opsbee-stage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq-producer
+  template:
+    metadata:
+      labels:
+        app: rabbitmq-producer
+    spec:
+      containers:
+        - name: producer
+          image: benhursilva/rabbitmq-tester:latest
+          args: []
